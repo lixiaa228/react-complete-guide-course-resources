@@ -1,23 +1,73 @@
-import logo from './assets/no-projects.png'
+import NoProjectsSelected from "./components/NoProjectsSelected.jsx";
+import NewProject from "./components/NewProject.jsx";
+import {useState} from "react";
+import SelectedSection from "./components/SelectedSection.jsx";
+import TabProjects from "./components/TabProjects.jsx";
+
 
 function App() {
-  return (
-    <>
-        <div className="flex mt-[100px]">
-            <div className="w-[400px] h-[600px] rounded-r-2xl bg-[#100e0c] text-white flex flex-col">
-                <h1 className="mt-[60px] text-2xl font-semibold ml-[30px]">YOUR PROJECTS</h1>
-                <button className="bg-[#322e2b] text-center text-[#837e7b] w-[140px] h-[45px] rounded-md ml-[30px] font-medium mt-[30px]">+ Add project</button>
-            </div>
-            <div className="flex flex-col justify-center p-8 text-center items-center w-[1000px]">
-                <img className="w-[60px]" src={logo}></img>
-                <h1 className="text-2xl font-bold text-[#625e5c] m-4">No Project Selected</h1>
-                <p className="text-[#9d9b98]">Select a project or get started with a new one</p>
-                <button className="bg-[#322e2b] text-center  text-[#94908d] w-[160px] h-[45px] rounded-md font-medium mt-[30px] px-2">Create new project</button>
-            </div>
+    const [isSelected, setIsSelected] = useState(false);
+    const [isAddingProject, setIsAddingProject] = useState(false);
 
+    const [projects, setProjects] = useState({});
+    const [selectedKey, setNewSelectedKey] = useState(null);
+
+    function openProject(titleKey) {
+        setIsSelected(true);
+    }
+
+    function deleteProject() {
+        setIsSelected(false);
+        setIsAddingProject(false);
+        setNewSelectedKey(null);
+    }
+
+    function updateTitleKey(titleKey) {
+        setNewSelectedKey(titleKey);
+    }
+
+    function addProject() {
+        setIsAddingProject(true)
+    }
+
+
+    function updateProject(updatedData) {
+        setProjects(updatedData);
+    }
+
+    function isSelectedProject(values) {
+
+        values.title === "" ? setIsAddingProject(true) : setIsAddingProject(false)
+        setIsSelected(false)
+
+        if (!values) return
+        setProjects(project => ({
+            ...project,
+            [values.title]: {
+                "title": values.title,
+                "description": values.description,
+                "date": values.date,
+            }
+        }))
+    }
+
+    const viewKey = `${isSelected}-${isAddingProject}`;
+
+    const views = {
+
+        "true-true":  <NewProject onNoSelect={isSelectedProject} onCancel={deleteProject}/>,
+        "true-false": <SelectedSection onNoSelect={deleteProject} keyProjects={selectedKey} projects={projects} updateProject={updateProject}/>,
+        "false-true": <NewProject onNoSelect={isSelectedProject} onCancel={deleteProject}/>,
+        "false-false": <NoProjectsSelected onAddProject={addProject}/>,
+    };
+
+    return (
+        <div className="flex flex-row justify-center text-center w-[1000px] items-center mr-[300px] h-screen">
+            <TabProjects onAddProject={addProject} projects={projects} isOpenedProject={openProject}
+                         updateTitleKey={updateTitleKey}/>
+            {views[viewKey] ?? null}
         </div>
-    </>
-  );
+    );
 }
 
 export default App;
