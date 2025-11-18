@@ -8,6 +8,7 @@ export default [
       'A framework to build user interfaces with help of imperative code.',
       'A library used for building mobile applications only.',
     ],
+    correct_answer: 'A library used for building mobile applications only.',
   },
   {
     id: 'q2',
@@ -18,6 +19,7 @@ export default [
       'Handling errors within the application.',
       'Part of the Redux library for managing global state.',
     ],
+    correct_answer: 'Creating responsive layouts in React applications.',
   },
   {
     id: 'q3',
@@ -28,6 +30,8 @@ export default [
       'A specific HTML version that was explicitly created for React.',
       'A tool for making HTTP requests in a React application.',
     ],
+    correct_answer: 'A specific HTML version that was explicitly created for React.',
+
   },
   {
     id: 'q4',
@@ -38,6 +42,7 @@ export default [
       'By creating a file with a .jsx extension.',
       'By using the "new" keyword followed by the component name.',
     ],
+    correct_answer: 'By creating a file with a .jsx extension.',
   },
   {
     id: 'q5',
@@ -48,6 +53,7 @@ export default [
       'The overall status of a React application, including all props and components.',
       'A library for managing global state in React applications.',
     ],
+    correct_answer: 'The overall status of a React application, including all props and components.',
   },
   {
     id: 'q6',
@@ -58,6 +64,7 @@ export default [
       'By using the forEach() method to iterate over an array of data and returning JSX.',
       'By using the loop() method to iterate over an array of data and returning JSX.',
     ],
+    correct_answer: 'By using the forEach() method to iterate over an array of data and returning JSX.',
   },
   {
     id: 'q7',
@@ -68,5 +75,6 @@ export default [
       'Using the && operator.',
       'Using an if-else statement.',
     ],
+    correct_answer: "Using a ternary operator.",
   },
 ];
